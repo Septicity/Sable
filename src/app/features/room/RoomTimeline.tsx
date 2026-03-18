@@ -490,11 +490,12 @@ const useLiveEventArrive = (room: Room, onArrive: (mEvent: MatrixEvent) => void)
   onArriveRef.current = onArrive;
 
   useEffect(() => {
-    // Capture the live timeline and registration time. Events appended to the
-    // live timeline AFTER this point can be genuinely new even when
-    // liveEvent=false (older sliding sync proxies that omit num_live).
-    const liveTimeline = getLiveTimeline(room);
-    const registeredAt = Date.now();
+    // Mutable refs track the "current" live timeline and the timestamp at which
+    // we last reattached to it. Both are refreshed together inside the handler
+    // whenever a TimelineReset replaces the SDK's live EventTimeline object.
+    let liveTimeline = getLiveTimeline(room);
+    let registeredAt = Date.now();
+
     const handleTimelineEvent: EventTimelineSetHandlerMap[RoomEvent.Timeline] = (
       mEvent: MatrixEvent,
       eventRoom: Room | undefined,
@@ -503,6 +504,15 @@ const useLiveEventArrive = (room: Room, onArrive: (mEvent: MatrixEvent) => void)
       data: IRoomTimelineData
     ) => {
       if (eventRoom?.roomId !== room.roomId) return;
+
+      // If the SDK has replaced the live timeline (TimelineReset / limited sync),
+      // reanchor both the reference and the timestamp before the isLive check.
+      const currentLiveTimeline = getLiveTimeline(room);
+      if (currentLiveTimeline !== liveTimeline) {
+        liveTimeline = currentLiveTimeline;
+        registeredAt = Date.now();
+      }
+
       // Standard sync: liveEvent=true for real-time events.
       // Sliding sync fallback: liveEvent=false on buggy proxies. Treat events
       // on the live timeline as new only when their server timestamp is within
