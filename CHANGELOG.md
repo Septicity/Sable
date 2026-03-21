@@ -1,5 +1,12 @@
 # Sable Client Changelog
 
+## 1.11.0 (2026-03-21)
+
+### Features
+
+* Implemented improved rendering for space hierarchies in nav bar and lobby. ([#252](https://github.com/SableClient/Sable/pull/252) by @KaceCottam)
+* Added styling for replies to non-messages. ([#416](https://github.com/SableClient/Sable/pull/416) by @nushea)
+
 ## 1.10.6 (2026-03-21)
 
 ### Fixes
