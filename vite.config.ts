@@ -18,6 +18,7 @@ import { cloudflare } from '@cloudflare/vite-plugin';
 import { createRequire } from 'module';
 import { sentryVitePlugin } from '@sentry/vite-plugin';
 import buildConfig from './build.config';
+import electron from 'vite-plugin-electron/simple';
 
 const packageJson = JSON.parse(
   fs.readFileSync(path.resolve(__dirname, 'package.json'), 'utf8')
@@ -183,14 +184,20 @@ export default defineConfig(({ command }) => ({
         type: 'module',
       },
     }),
-    cloudflare({
-      config: {
-        compatibility_date: '2026-03-03',
-        assets: {
-          not_found_handling: 'single-page-application',
-        },
-      },
-    }),
+
+    ...(process.env.ELECTRON !== 'true'
+      ? [
+          cloudflare({
+            config: {
+              compatibility_date: '2026-03-03',
+              assets: {
+                not_found_handling: 'single-page-application',
+              },
+            },
+          }),
+        ]
+      : []),
+
     compression({
       algorithms: [
         defineAlgorithm('brotliCompress', {
@@ -199,6 +206,36 @@ export default defineConfig(({ command }) => ({
       ],
       include: /\.(html|xml|css|json|js|mjs|svg|yaml|yml|toml|wasm|txt|map)$/,
     }),
+
+    // Electron plugin — only active when ELECTRON env var is true at build time
+    ...(process.env.ELECTRON === 'true'
+      ? [
+          electron({
+            main: {
+              entry: 'src-electron/main.ts',
+              vite: {
+                build: {
+                  outDir: 'src-electron/dist',
+                  rollupOptions: {
+                    external: ['@vencord/venmic'],
+                  },
+                },
+              },
+            },
+            preload: {
+              input: 'src-electron/preload.ts',
+              vite: {
+                build: {
+                  outDir: 'src-electron/dist',
+                },
+              },
+            },
+
+            // renderer: {},
+          }),
+        ]
+      : []),
+
     // Sentry source map upload — only active when credentials are provided at build time
     ...(process.env.SENTRY_AUTH_TOKEN && process.env.SENTRY_ORG && process.env.SENTRY_PROJECT
       ? [

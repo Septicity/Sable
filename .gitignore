@@ -1,5 +1,7 @@
 experiment
 dist
+src-electron/release
+src-electron/dist
 coverage
 node_modules
 devAssets

@@ -3,6 +3,7 @@
   "version": "1.12.3",
   "description": "An almost stable Matrix client",
   "type": "module",
+  "main": "src-electron/dist/main.js",
   "packageManager": "pnpm@10.32.1+sha512.a706938f0e89ac1456b6563eab4edf1d1faf3368d1191fc5c59790e96dc918e4456ab2e67d613de1043d2e8c81f87303e6b40d4ffeca9df15ef1ad567348f2be",
   "engines": {
     "node": "24.x",
@@ -12,6 +13,8 @@
     "dev": "vite dev",
     "build": "vite build",
     "preview": "vite preview",
+    "electron:dev": "cross-env ELECTRON=true vite dev",
+    "electron:build": "cross-env ELECTRON=true vite build && electron-builder",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "fmt": "prettier --write .",
@@ -25,10 +28,42 @@
     "tunnel": "cloudflared tunnel --url http://localhost:8080",
     "knope": "knope",
     "document-change": "knope document-change",
-    "postinstall": "node scripts/install-knope.js"
+    "postinstall": "node scripts/install-knope.js && electron-builder install-app-deps"
+  },
+  "build": {
+    "appId": "moe.sable.client",
+    "productName": "Sable",
+    "directories": {
+      "output": "src-electron/release"
+    },
+    "files": [
+      "dist/**/*",
+      "src-electron/dist/**/*"
+    ],
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "rpm"
+      ],
+      "icon": "public/res/logo/cinny-logo-512x512.png",
+      "category": "Network;Chat;InstantMessaging;"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "zip"
+      ]
+    },
+    "mac": {
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    }
   },
   "keywords": [],
-  "author": "7w1",
+  "author": "7w1 <hi@sable.moe> (https://sable.moe)",
   "license": "AGPL-3.0-only",
   "dependencies": {
     "@atlaskit/pragmatic-drag-and-drop": "^1.7.7",
@@ -45,6 +80,7 @@
     "@vanilla-extract/css": "^1.18.0",
     "@vanilla-extract/recipes": "^0.5.7",
     "@vanilla-extract/vite-plugin": "^5.1.4",
+    "@vencord/venmic": "^6.1.0",
     "await-to-js": "^3.0.0",
     "badwords-list": "^2.0.1-4",
     "blurhash": "^2.0.5",
@@ -121,6 +157,9 @@
     "@vitest/ui": "^4.1.0",
     "buffer": "^6.0.3",
     "cloudflared": "^0.7.1",
+    "cross-env": "^10.1.0",
+    "electron": "^41.0.4",
+    "electron-builder": "^26.8.1",
     "eslint": "9.39.3",
     "eslint-config-airbnb-extended": "3.0.1",
     "eslint-config-prettier": "10.1.8",
@@ -132,6 +171,8 @@
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-compression2": "2.5.0",
+    "vite-plugin-electron": "^0.29.1",
+    "vite-plugin-electron-renderer": "^0.14.6",
     "vite-plugin-pwa": "^1.2.0",
     "vite-plugin-static-copy": "^3.2.0",
     "vite-plugin-svgr": "4.5.0",
