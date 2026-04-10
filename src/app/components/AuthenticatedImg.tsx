@@ -8,9 +8,24 @@ type AuthenticatedImgProps = React.ImgHTMLAttributes<HTMLImageElement> & {
 
 export function AuthenticatedImg({ src, ...props }: AuthenticatedImgProps) {
   const resolvedSrc = useMediaSrc(src);
-  const safeSrc = getSafeMediaUrl(resolvedSrc ?? src);
+  const candidateSrc = resolvedSrc ?? src;
+  const safeSrc = getSafeMediaUrl(candidateSrc);
 
   if (!safeSrc) return null;
 
-  return <img {...props} src={safeSrc} />;
+  try {
+    const parsedSrc = new URL(safeSrc);
+
+    if (
+      parsedSrc.protocol !== 'blob:' &&
+      parsedSrc.protocol !== 'http:' &&
+      parsedSrc.protocol !== 'https:'
+    ) {
+      return null;
+    }
+
+    return <img {...props} src={parsedSrc.toString()} />;
+  } catch {
+    return null;
+  }
 }

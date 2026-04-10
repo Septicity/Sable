@@ -489,10 +489,26 @@ function FallbackImg({
 }: ComponentPropsWithoutRef<'img'> & { fallback: ReactNode }) {
   const [failed, setFailed] = useState(false);
   const resolvedSrc = useMediaSrc(src);
-  const safeSrc = getSafeMediaUrl(resolvedSrc ?? src);
+  const candidateSrc = resolvedSrc ?? src;
+  const safeSrc = getSafeMediaUrl(candidateSrc);
   if (failed) return <>{fallback}</>;
   if (!safeSrc) return <>{fallback}</>;
-  return <img {...props} src={safeSrc} onError={() => setFailed(true)} />;
+
+  try {
+    const parsedSrc = new URL(safeSrc);
+
+    if (
+      parsedSrc.protocol !== 'blob:' &&
+      parsedSrc.protocol !== 'http:' &&
+      parsedSrc.protocol !== 'https:'
+    ) {
+      return <>{fallback}</>;
+    }
+
+    return <img {...props} src={parsedSrc.toString()} onError={() => setFailed(true)} />;
+  } catch {
+    return <>{fallback}</>;
+  }
 }
 
 export const getReactCustomHtmlParser = (
