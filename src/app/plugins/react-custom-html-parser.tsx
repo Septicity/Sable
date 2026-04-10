@@ -35,6 +35,7 @@ import { findAndReplace } from '$utils/findAndReplace';
 import { onEnterOrSpace } from '$utils/keyboard';
 import { copyToClipboard } from '$utils/dom';
 import { isMatrixHexColor } from '$utils/matrixHtml';
+import { getSafeMediaUrl } from '$utils/sanitize';
 import { useTimeoutToggle } from '$hooks/useTimeoutToggle';
 import { useMediaSrc } from '$hooks/useMediaSrc';
 import { parseSettingsLink } from '$features/settings/settingsLink';
@@ -488,8 +489,10 @@ function FallbackImg({
 }: ComponentPropsWithoutRef<'img'> & { fallback: ReactNode }) {
   const [failed, setFailed] = useState(false);
   const resolvedSrc = useMediaSrc(src);
+  const safeSrc = getSafeMediaUrl(resolvedSrc ?? src);
   if (failed) return <>{fallback}</>;
-  return <img {...props} src={resolvedSrc ?? src} onError={() => setFailed(true)} />;
+  if (!safeSrc) return <>{fallback}</>;
+  return <img {...props} src={safeSrc} onError={() => setFailed(true)} />;
 }
 
 export const getReactCustomHtmlParser = (
@@ -877,6 +880,12 @@ export const getReactCustomHtmlParser = (
                 }
               />
             );
+
+          return (
+            <span title={`Failed to load media${props.alt ? `: ${props.alt}` : ''}`}>
+              {fallbackLabel}
+            </span>
+          );
         }
       }
 

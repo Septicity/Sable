@@ -1,11 +1,13 @@
 import { hasServiceWorker } from '$utils/platform';
+import { getSafeMediaUrl } from '$utils/sanitize';
 import { useMatrixClient } from './useMatrixClient';
 import { useAuthenticatedMediaUrl } from './useAuthenticatedMediaUrl';
 
 /** Wraps a media URL for `<img>` / `<video>` src. Returns a blob: URL on platforms without a SW. */
 export function useMediaSrc(url: string | undefined): string | undefined {
   const mx = useMatrixClient();
-  return useAuthenticatedMediaUrl(url, url ? mx.getAccessToken?.() : undefined);
+  const safeUrl = getSafeMediaUrl(url);
+  return useAuthenticatedMediaUrl(safeUrl, safeUrl ? mx.getAccessToken?.() : undefined);
 }
 
 /** Returns the access token for media downloads, or `undefined` when a SW handles auth. */
