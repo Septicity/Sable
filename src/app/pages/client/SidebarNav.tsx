@@ -106,6 +106,7 @@ export function SidebarNav() {
                 <DirectTab />
                 <DirectDMsList />
               </SidebarStack>
+              <SidebarStackSeparator />
               <SpaceTabs scrollRef={scrollRef} />
               <SidebarStack>
                 <CreateTab />

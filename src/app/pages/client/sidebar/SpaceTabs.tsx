@@ -1003,7 +1003,7 @@ export function SpaceTabs({ scrollRef }: Readonly<SpaceTabsProps>) {
           }}
         />
       )}
-      <SidebarStackSeparator />
+
       <SidebarStack className="Spaces">
         {sidebarItems.map((item) => {
           if (typeof item === 'object') {
