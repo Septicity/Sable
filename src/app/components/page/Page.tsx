@@ -42,7 +42,7 @@ type ClientDrawerLayoutProps = {
 };
 export function PageNav({ size, children }: ClientDrawerLayoutProps & css.PageNavVariants) {
   return (
-    <Box className={classNames(css.PageNav({ size }), css.PageNavBox)}>
+    <Box className={classNames('PageNav', css.PageNav({ size }), css.PageNavBox)}>
       <Box grow="Yes" direction="Column">
         {children}
       </Box>
@@ -55,7 +55,7 @@ type PageNavHeaderOwnProps = Pick<ComponentProps<typeof Header>, 'size'>;
 export const PageNavHeader = as<'header', css.PageNavHeaderVariants & PageNavHeaderOwnProps>(
   ({ className, outlined, ...props }, ref) => (
     <Header
-      className={classNames(css.PageNavHeader({ outlined }), className)}
+      className={classNames('Header', css.PageNavHeader({ outlined }), className)}
       variant="Background"
       {...props}
       ref={ref}
@@ -80,7 +80,7 @@ export function PageNavContent({
         hideTrack
         visibility="Hover"
       >
-        <div className={css.PageNavContent}>{children}</div>
+        <div className={classNames('PageNavContent', css.PageNavContent)}>{children}</div>
       </Scroll>
     </Box>
   );
@@ -90,7 +90,7 @@ export const Page = as<'div'>(({ className, ...props }, ref) => (
   <Box
     grow="Yes"
     direction="Column"
-    className={classNames(ContainerColor({ variant: 'Surface' }), className)}
+    className={classNames('PageContent', ContainerColor({ variant: 'Surface' }), className)}
     {...props}
     ref={ref}
   />
@@ -101,7 +101,7 @@ export const PageHeader = as<'div', css.PageHeaderVariants>(
     <Header
       as="header"
       size="600"
-      className={classNames(css.PageHeader({ balance, outlined }), className)}
+      className={classNames('Header', css.PageHeader({ balance, outlined }), className)}
       {...props}
       ref={ref}
     />

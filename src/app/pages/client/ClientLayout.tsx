@@ -20,8 +20,14 @@ export function ClientLayout({ nav, children }: ClientLayoutProps) {
 
   return (
     <Box grow="Yes" direction="Row">
-      {!fullPageSettings && !railInDrawer && <Box shrink="No">{nav}</Box>}
-      <Box grow="Yes">{children}</Box>
+      {!fullPageSettings && !railInDrawer && (
+        <Box className="SidebarContainer" shrink="No">
+          {nav}
+        </Box>
+      )}
+      <Box className="Page" grow="Yes">
+        {children}
+      </Box>
     </Box>
   );
 }

@@ -3,6 +3,7 @@ import { Line, toRem } from 'folds';
 export function SidebarStackSeparator() {
   return (
     <Line
+      className="Separator"
       role="separator"
       style={{ width: toRem(24), margin: '0 auto' }}
       variant="Background"

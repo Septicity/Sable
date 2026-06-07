@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Box, Header, IconButton, Scroll, Spinner, Text, config, toRem } from 'folds';
 import { Chats, composerIcon, X } from '$components/icons/phosphor';
 import type { IEvent, Room, CryptoBackend } from '$types/matrix-sdk';
+import classNames from 'classnames';
 import {
   Direction,
   MatrixEvent,
@@ -290,7 +291,7 @@ export function ThreadDrawer({ room, threadRootId, onClose, overlay }: ThreadDra
       // thread.addEvents() is typed as void but is internally async; schedule
       // forceUpdate in a microtask so the timeline has been updated first.
       currThread.addEvents(liveEvents, false);
-      Promise.resolve().then(() => forceUpdate((n) => n + 1));
+      void Promise.resolve().then(() => forceUpdate((n) => n + 1));
       return;
     }
 
@@ -391,7 +392,7 @@ export function ThreadDrawer({ room, threadRootId, onClose, overlay }: ThreadDra
     sentinels.forEach((e) => e.on(MatrixEventEvent.Decrypted, retryDecrypt));
 
     // Attempt immediately in case keys arrived since the initial failure
-    retryDecrypt();
+    void retryDecrypt();
 
     return () => {
       sentinels.forEach((e) => e.off(MatrixEventEvent.Decrypted, retryDecrypt));
@@ -428,7 +429,7 @@ export function ThreadDrawer({ room, threadRootId, onClose, overlay }: ThreadDra
     };
 
     // Mark as read when opened and when new messages arrive
-    markThreadAsRead();
+    void markThreadAsRead();
   }, [mx, room, threadRootId, forceUpdateCounter, isInactivePanel]);
 
   const replyEvents = getThreadReplyEvents(room, threadRootId);
@@ -596,7 +597,11 @@ export function ThreadDrawer({ room, threadRootId, onClose, overlay }: ThreadDra
   return (
     <Box
       ref={drawerRef}
-      className={overlay ? css.ThreadDrawerOverlay : css.ThreadDrawer}
+      className={
+        overlay
+          ? classNames('ThreadDrawerOverlay', css.ThreadDrawerOverlay)
+          : classNames('ThreadDrawer', css.ThreadDrawer)
+      }
       direction="Column"
       shrink="No"
       style={{
@@ -616,7 +621,11 @@ export function ThreadDrawer({ room, threadRootId, onClose, overlay }: ThreadDra
         />
       )}
       {/* Header */}
-      <Header className={css.ThreadDrawerHeader} variant="Background" size="600">
+      <Header
+        className={classNames('ThreadDrawerHeader', css.ThreadDrawerHeader)}
+        variant="Background"
+        size="600"
+      >
         <Box grow="Yes" alignItems="Center" gap="200">
           {composerIcon(Chats)}
           <Text size="H4" truncate>

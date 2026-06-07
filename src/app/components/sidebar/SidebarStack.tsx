@@ -4,6 +4,10 @@ import * as css from './Sidebar.css';
 
 export const SidebarStack = as<'div'>(
   ({ as: AsSidebarStack = 'div', className, ...props }, ref) => (
-    <AsSidebarStack className={classNames(css.SidebarStack, className)} {...props} ref={ref} />
+    <AsSidebarStack
+      className={classNames('SidebarStack', css.SidebarStack, className)}
+      {...props}
+      ref={ref}
+    />
   )
 );

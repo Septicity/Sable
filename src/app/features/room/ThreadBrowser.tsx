@@ -1,6 +1,7 @@
 import type { ChangeEventHandler, MouseEventHandler } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Box, Header, IconButton, Input, Scroll, Spinner, Text, config, Chip, toRem } from 'folds';
+import classNames from 'classnames';
 import type { EventTimelineSet, MatrixEvent, Room, Thread } from '$types/matrix-sdk';
 import { NotificationCountType, RoomEvent, ThreadEvent } from '$types/matrix-sdk';
 import { useAtomValue } from 'jotai';
@@ -223,7 +224,7 @@ export function ThreadBrowser({ room, onOpenThread, onClose, overlay }: ThreadBr
         if (!cancelled) setLoadingMore(false);
       }
     };
-    loadThreads();
+    void loadThreads();
 
     return () => {
       cancelled = true;
@@ -275,7 +276,7 @@ export function ThreadBrowser({ room, onOpenThread, onClose, overlay }: ThreadBr
     const el = e.currentTarget;
     const distanceFromBottom = el.scrollHeight - el.scrollTop - el.clientHeight;
     if (distanceFromBottom < 200 && canLoadMoreRef.current && !loadingMoreRef.current) {
-      handleLoadMoreRef.current();
+      void handleLoadMoreRef.current();
     }
   }, []);
 
@@ -307,7 +308,11 @@ export function ThreadBrowser({ room, onOpenThread, onClose, overlay }: ThreadBr
   }, [threadSidebarWidth]);
   return (
     <Box
-      className={overlay ? css.ThreadDrawerOverlay : css.ThreadDrawer}
+      className={
+        overlay
+          ? classNames('ThreadDrawerOverlay', 'ThreadDrawer', 'Drawer', css.ThreadDrawerOverlay)
+          : classNames('ThreadDrawer', 'Drawer', css.ThreadDrawer)
+      }
       direction="Column"
       shrink="No"
       style={{
@@ -325,7 +330,11 @@ export function ThreadBrowser({ room, onOpenThread, onClose, overlay }: ThreadBr
           isReversed
         />
       )}
-      <Header className={css.ThreadDrawerHeader} variant="Background" size="600">
+      <Header
+        className={classNames('Header', css.ThreadDrawerHeader)}
+        variant="Background"
+        size="600"
+      >
         <Box grow="Yes" alignItems="Center" gap="200">
           {composerIcon(Chats)}
           <Text size="H4" truncate>

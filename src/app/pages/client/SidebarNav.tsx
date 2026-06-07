@@ -101,7 +101,7 @@ export function SidebarNav() {
         <SidebarContent
           scrollable={
             <Scroll ref={scrollRef} variant="Background" size="0">
-              <SidebarStack>
+              <SidebarStack className="Home">
                 <HomeTab />
                 <DirectTab />
                 <DirectDMsList />
@@ -115,7 +115,7 @@ export function SidebarNav() {
           sticky={
             <>
               {(oldSidebar || isCollapsed) && (
-                <SidebarStack>
+                <SidebarStack className="Tools">
                   {oldSidebar ? (
                     <>
                       <NavigateTab />

@@ -8,10 +8,10 @@ type SidebarContentProps = {
 export function SidebarContent({ scrollable, sticky }: SidebarContentProps) {
   return (
     <>
-      <Box direction="Column" grow="Yes">
+      <Box className="Scrollable-section" direction="Column" grow="Yes">
         {scrollable}
       </Box>
-      <Box direction="Column" shrink="No">
+      <Box className="Sticky-section" direction="Column" shrink="No">
         {sticky}
       </Box>
     </>

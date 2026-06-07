@@ -6,7 +6,7 @@ import LogoSVG from '$public/res/svg/logo.svg';
 
 export function WelcomePage() {
   return (
-    <Page>
+    <Page className="Welcome">
       <Box
         grow="Yes"
         style={{ padding: config.space.S400, paddingBottom: config.space.S700 }}

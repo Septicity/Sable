@@ -73,7 +73,7 @@ function MemberDrawerHeader({ room, hideText }: MemberDrawerHeaderProps) {
   const setPeopleDrawer = useSetSetting(settingsAtom, 'isPeopleDrawer');
 
   return (
-    <Header className={css.MembersDrawerHeader} variant="Background" size="600">
+    <Header className={classNames("Header", css.MembersDrawerHeader)} variant="Background" size="600">
       <Box grow="Yes" alignItems="Center" gap="200">
         {!hideText && (
           <Box grow="Yes" alignItems="Center" gap="200">
@@ -330,7 +330,7 @@ export function MembersDrawer({ room, members }: MembersDrawerProps) {
   const sortMenu = useMenuAnchor<HTMLButtonElement>();
   return (
     <Box
-      className={classNames(css.MembersDrawer, ContainerColor({ variant: 'Background' }))}
+      className={classNames("MembersDrawer", "Drawer", css.MembersDrawer, ContainerColor({ variant: 'Background' }))}
       shrink="No"
       direction="Column"
       style={{

@@ -18,7 +18,7 @@ const SidebarItemBottom = as<'div', css.SidebarItemVariants>(
 export const SidebarItemLeft = as<'div', css.SidebarItemVariants>(
   ({ as: AsSidebarAvatarBox = 'div', className, active, ...props }, ref) => (
     <AsSidebarAvatarBox
-      className={classNames(css.SidebarItem({ active }), className)}
+      className={classNames('SidebarItem', css.SidebarItem({ active }), className)}
       {...props}
       ref={ref}
     />
@@ -54,7 +54,7 @@ export const SidebarItem = ({
 export const SidebarItemBadge = as<'div', css.SidebarItemBadgeVariants>(
   ({ as: AsSidebarBadgeBox = 'div', className, mode, ...props }, ref) => (
     <AsSidebarBadgeBox
-      className={classNames(css.SidebarItemBadge({ mode }), className)}
+      className={classNames('SidebarItemBadgeBox', css.SidebarItemBadge({ mode }), className)}
       {...props}
       ref={ref}
     />
@@ -92,7 +92,7 @@ export function SidebarItemTooltip({
 export const SidebarAvatar = as<'div', css.SidebarAvatarVariants & ComponentProps<typeof Avatar>>(
   ({ className, size, outlined, radii, ...props }, ref) => (
     <Avatar
-      className={classNames(css.SidebarAvatar({ size, outlined }), className)}
+      className={classNames("Avatar", css.SidebarAvatar({ size, outlined }), className)}
       radii={radii}
       {...props}
       ref={ref}
@@ -103,7 +103,7 @@ export const SidebarAvatar = as<'div', css.SidebarAvatarVariants & ComponentProp
 export const SidebarFolder = as<'div', css.SidebarFolderVariants>(
   ({ as: AsSidebarFolder = 'div', className, state, ...props }, ref) => (
     <AsSidebarFolder
-      className={classNames(css.SidebarFolder({ state }), className)}
+      className={classNames("Folder", css.SidebarFolder({ state }), className)}
       {...props}
       ref={ref}
     />
@@ -113,7 +113,7 @@ export const SidebarFolder = as<'div', css.SidebarFolderVariants>(
 export const SidebarFolderDropTarget = as<'div', css.SidebarFolderDropTargetVariants>(
   ({ as: AsSidebarFolderDropTarget = 'div', className, position, ...props }, ref) => (
     <AsSidebarFolderDropTarget
-      className={classNames(css.SidebarFolderDropTarget({ position }), className)}
+      className={classNames("SidebarFolderDropTarget", css.SidebarFolderDropTarget({ position }), className)}
       {...props}
       ref={ref}
     />

@@ -140,7 +140,7 @@ const SpaceMenu = forwardRef<HTMLDivElement, SpaceMenuProps>(
     const handleCopyLink = () => {
       const roomIdOrAlias = getCanonicalAliasOrRoomId(mx, room.roomId);
       const viaServers = isRoomAlias(roomIdOrAlias) ? undefined : getViaServers(room);
-      copyToClipboard(getMatrixToRoom(roomIdOrAlias, viaServers));
+      void copyToClipboard(getMatrixToRoom(roomIdOrAlias, viaServers));
       requestClose();
     };
 
@@ -651,12 +651,19 @@ function OpenedSpaceFolder({
   return (
     <SidebarFolder
       state="Open"
+      className="Open"
       data-drop-above={orderAbove === 'reorder-above'}
       data-drop-below={orderBelow === 'reorder-below'}
     >
       <SidebarFolderDropTarget ref={aboveTargetRef} position="Top" />
       <SidebarAvatar size="300" onContextMenu={onFolderContextMenu}>
-        <IconButton data-id={folder.id} size="300" variant="Background" onClick={onClose}>
+        <IconButton
+          className="FolderToggle"
+          data-id={folder.id}
+          size="300"
+          variant="Background"
+          onClick={onClose}
+        >
           {composerIcon(CaretUp, { weight: 'fill' })}
         </IconButton>
       </SidebarAvatar>
@@ -708,6 +715,7 @@ function ClosedSpaceFolder({
             {(tooltipRef) => (
               <SidebarFolder
                 data-id={folder.id}
+                className="Closed"
                 as="button"
                 ref={tooltipRef}
                 onClick={onOpen}
@@ -778,7 +786,7 @@ export function SpaceTabs({ scrollRef }: Readonly<SpaceTabsProps>) {
       const newItems = renameSidebarFolderItem(sidebarItems, folderId, rawName);
       const newSpacesContent = makeCinnySpacesContent(mx, newItems);
       localEchoSidebarItem(parseSidebar(mx, orphanSpaces, newSpacesContent));
-      mx.setAccountData(CustomAccountDataEvent.CinnySpaces, newSpacesContent);
+      void mx.setAccountData(CustomAccountDataEvent.CinnySpaces, newSpacesContent);
     },
     [mx, sidebarItems, orphanSpaces, localEchoSidebarItem]
   );
@@ -913,7 +921,7 @@ export function SpaceTabs({ scrollRef }: Readonly<SpaceTabsProps>) {
 
         const newSpacesContent = makeCinnySpacesContent(mx, newItems);
         localEchoSidebarItem(parseSidebar(mx, orphanSpaces, newSpacesContent));
-        mx.setAccountData(CustomAccountDataEvent.CinnySpaces, newSpacesContent);
+        void mx.setAccountData(CustomAccountDataEvent.CinnySpaces, newSpacesContent);
       },
       [mx, sidebarItems, setOpenedFolder, localEchoSidebarItem, orphanSpaces]
     )
@@ -956,7 +964,7 @@ export function SpaceTabs({ scrollRef }: Readonly<SpaceTabsProps>) {
 
       const newSpacesContent = makeCinnySpacesContent(mx, newItems);
       localEchoSidebarItem(parseSidebar(mx, orphanSpaces, newSpacesContent));
-      mx.setAccountData(CustomAccountDataEvent.CinnySpaces, newSpacesContent);
+      void mx.setAccountData(CustomAccountDataEvent.CinnySpaces, newSpacesContent);
     },
     [mx, sidebarItems, orphanSpaces, localEchoSidebarItem]
   );
@@ -996,7 +1004,7 @@ export function SpaceTabs({ scrollRef }: Readonly<SpaceTabsProps>) {
         />
       )}
       <SidebarStackSeparator />
-      <SidebarStack>
+      <SidebarStack className="Spaces">
         {sidebarItems.map((item) => {
           if (typeof item === 'object') {
             if (openedFolder.has(item.id)) {

@@ -135,26 +135,26 @@ export function Room() {
           {callView && chat && (
             <>
               {screenSize === ScreenSize.Desktop && (
-                <Line variant="Background" direction="Vertical" size="300" />
+                <Line className="DrawerLine" variant="Background" direction="Vertical" size="300" />
               )}
               <CallChatView />
             </>
           )}
           {!callView && screenSize === ScreenSize.Desktop && isDrawer && (
             <>
-              <Line variant="Background" direction="Vertical" size="300" />
+              <Line className="DrawerLine" variant="Background" direction="Vertical" size="300" />
               <MembersDrawer key={room.roomId} room={room} members={members} />
             </>
           )}
           {screenSize === ScreenSize.Desktop && isWidgetDrawerOpen && (
             <>
-              <Line variant="Background" direction="Vertical" size="300" />
+              <Line className="DrawerLine" variant="Background" direction="Vertical" size="300" />
               <WidgetsDrawer key={`widgets-${room.roomId}`} room={room} />
             </>
           )}
           {screenSize === ScreenSize.Desktop && openThreadId && (
             <>
-              <Line variant="Background" direction="Vertical" size="300" />
+              <Line className="DrawerLine" variant="Background" direction="Vertical" size="300" />
               <ThreadDrawer
                 key={`thread-${room.roomId}-${openThreadId}`}
                 room={room}
@@ -165,7 +165,7 @@ export function Room() {
           )}
           {screenSize === ScreenSize.Desktop && threadBrowserOpen && !openThreadId && (
             <>
-              <Line variant="Background" direction="Vertical" size="300" />
+              <Line className="DrawerLine" variant="Background" direction="Vertical" size="300" />
               <ThreadBrowser
                 key={`thread-browser-${room.roomId}`}
                 room={room}

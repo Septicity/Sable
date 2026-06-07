@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import type { CSSProperties, ReactNode } from 'react';
 import { Box, Badge, toRem, Text } from 'folds';
 import { useSetting } from '$state/hooks/settings';
@@ -86,6 +87,7 @@ export function UnreadBadge({ highlight, count, dm, mode }: UnreadBadgeProps) {
 
   return (
     <Badge
+      className={classNames("Badge", { 'Highlight': highlight })}
       variant={highlight ? 'Success' : 'Secondary'}
       size={resolvedMode === 'count' ? '400' : '200'}
       fill="Solid"
@@ -93,7 +95,7 @@ export function UnreadBadge({ highlight, count, dm, mode }: UnreadBadgeProps) {
       outlined={false}
     >
       {resolvedMode === 'count' && (
-        <Text as="span" size="L400">
+        <Text className="Count" as="span" size="L400">
           {formatUnreadBadgeCount(count, showEasterEggs)}
         </Text>
       )}

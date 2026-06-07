@@ -25,6 +25,7 @@ import {
   X,
 } from '$components/icons/phosphor';
 import type { Room } from '$types/matrix-sdk';
+import classNames from 'classnames';
 
 import { useMatrixClient } from '$hooks/useMatrixClient';
 import type { RoomWidget } from '$hooks/useRoomWidgets';
@@ -54,7 +55,7 @@ function WidgetDrawerHeader({ activeWidget, onBack }: WidgetsDrawerHeaderProps) 
   const setWidgetDrawer = useSetSetting(settingsAtom, 'isWidgetDrawer');
 
   return (
-    <Header className={css.WidgetsDrawerHeader} variant="Background" size="600">
+    <Header className={classNames("Header", css.WidgetsDrawerHeader)} variant="Background" size="600">
       <Box grow="Yes" alignItems="Center" gap="200">
         {activeWidget && (
           <Box shrink="No" alignItems="Center">
@@ -263,7 +264,7 @@ export function WidgetsDrawer({ room }: WidgetsDrawerProps) {
 
   return (
     <Box
-      className={css.WidgetsDrawer}
+      className={classNames("WidgetsDrawer", "Drawer",css.WidgetsDrawer)}
       shrink="No"
       direction="Column"
       style={{
