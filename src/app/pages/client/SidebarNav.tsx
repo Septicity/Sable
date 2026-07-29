@@ -5,7 +5,7 @@ import { ResponsiveMenu } from '$components/ResponsiveMenu';
 import { useMenuAnchor } from '$hooks/useMenuAnchor';
 import { useSetting } from '$state/hooks/settings';
 import { settingsAtom } from '$state/settings';
-import { Sidebar, SidebarContent, SidebarStack } from '$components/sidebar';
+import { Sidebar, SidebarContent, SidebarStack, SidebarStackSeparator } from '$components/sidebar';
 import { DirectTab, DirectDMsList, HomeTab, SpaceTabs, InboxTab } from './sidebar';
 import { CreateTab } from './sidebar/CreateTab';
 import { NavigateTab } from './sidebar/NavigateTab';
@@ -108,6 +108,7 @@ export function SidebarNav() {
               </SidebarStack>
               <SidebarStackSeparator />
               <SpaceTabs scrollRef={scrollRef} />
+              <SidebarStackSeparator {...(oldSidebar ? { style: { position: 'sticky', bottom: 0 } } : {})} />
               <SidebarStack>
                 <CreateTab />
               </SidebarStack>

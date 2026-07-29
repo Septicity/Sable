@@ -57,7 +57,6 @@ import {
   SidebarUnreadBadge,
   SidebarItemTooltip,
   SidebarStack,
-  SidebarStackSeparator,
   SidebarFolder,
   SidebarFolderDropTarget,
 } from '$components/sidebar';
