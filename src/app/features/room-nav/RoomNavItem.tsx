@@ -527,6 +527,7 @@ export function RoomNavItem({
                       <Avatar
                         size={hideText ? undefined : '200'}
                         radii="400"
+                        className="Avatar"
                         style={hideTextStyling(hideText)}
                       >
                         {showAvatar || (avatarSrc && isStrict) ? (
@@ -536,7 +537,7 @@ export function RoomNavItem({
                             uniformIcons
                             alt={roomName}
                             renderFallback={() => (
-                              <Text as="span" size="H6">
+                              <Text className="Label" as="span" size="H6">
                                 {nameInitials(roomName)}
                               </Text>
                             )}

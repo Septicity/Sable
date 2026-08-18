@@ -345,9 +345,8 @@ export function ThreadBrowser({ room, onOpenThread, onClose, overlay }: ThreadBr
           <IconButton
             onClick={onClose}
             variant="SurfaceVariant"
-            size="300"
-            radii="300"
             aria-label="Close threads"
+            className="Button"
           >
             {composerIcon(X)}
           </IconButton>

@@ -73,7 +73,11 @@ function MemberDrawerHeader({ room, hideText }: MemberDrawerHeaderProps) {
   const setPeopleDrawer = useSetSetting(settingsAtom, 'isPeopleDrawer');
 
   return (
-    <Header className={classNames("Header", css.MembersDrawerHeader)} variant="Background" size="600">
+    <Header
+      className={classNames('Header', css.MembersDrawerHeader)}
+      variant="Background"
+      size="600"
+    >
       <Box grow="Yes" alignItems="Center" gap="200">
         {!hideText && (
           <Box grow="Yes" alignItems="Center" gap="200">
@@ -98,6 +102,7 @@ function MemberDrawerHeader({ room, hideText }: MemberDrawerHeaderProps) {
                 ref={triggerRef}
                 variant="Background"
                 onClick={() => setPeopleDrawer(false)}
+                className="Button"
               >
                 {composerIcon(X)}
               </IconButton>
@@ -330,7 +335,12 @@ export function MembersDrawer({ room, members }: MembersDrawerProps) {
   const sortMenu = useMenuAnchor<HTMLButtonElement>();
   return (
     <Box
-      className={classNames("MembersDrawer", "Drawer", css.MembersDrawer, ContainerColor({ variant: 'Background' }))}
+      className={classNames(
+        'MembersDrawer',
+        'Drawer',
+        css.MembersDrawer,
+        ContainerColor({ variant: 'Background' })
+      )}
       shrink="No"
       direction="Column"
       style={{
@@ -458,6 +468,7 @@ export function MembersDrawer({ room, members }: MembersDrawerProps) {
                     outlined
                     size="300"
                     aria-label="Scroll to Top"
+                    className="Button"
                   >
                     {composerIcon(CaretUp)}
                   </IconButton>

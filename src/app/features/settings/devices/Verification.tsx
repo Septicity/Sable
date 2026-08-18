@@ -34,11 +34,19 @@ import { stopPropagation } from '$utils/keyboard';
 import { useAuthMetadata } from '$hooks/useAuthMetadata';
 import { getAccountManagementUrl, useAccountManagementActions } from '$hooks/useAccountManagement';
 import { ModalOverlay } from '$components/modal-overlay/ModalOverlay';
+import classNames from 'classnames';
 
 type VerificationStatusBadgeProps = {
   verificationStatus: VerificationStatus;
   otherUnverifiedCount?: number;
 };
+
+const VerificationStatusBadgeClassName = {
+  Unverified: 'Unverified',
+  Warning: 'Warning',
+  Verified: 'Verified',
+} as const;
+
 export function VerificationStatusBadge({
   verificationStatus,
   otherUnverifiedCount,
@@ -51,7 +59,12 @@ export function VerificationStatusBadge({
   }
   if (verificationStatus === VerificationStatus.Unverified) {
     return (
-      <Badge variant="Critical" fill="Solid" size="500">
+      <Badge
+        className={classNames('Badge', VerificationStatusBadgeClassName.Unverified)}
+        variant="Critical"
+        fill="Solid"
+        size="500"
+      >
         <Text size="L400">Unverified</Text>
       </Badge>
     );
@@ -59,14 +72,24 @@ export function VerificationStatusBadge({
 
   if (otherUnverifiedCount > 0) {
     return (
-      <Badge variant="Warning" fill="Solid" size="500">
+      <Badge
+        className={classNames('Badge', VerificationStatusBadgeClassName.Warning)}
+        variant="Warning"
+        fill="Solid"
+        size="500"
+      >
         <Text size="L400">{otherUnverifiedCount} Unverified</Text>
       </Badge>
     );
   }
 
   return (
-    <Badge variant="Success" fill="Solid" size="500">
+    <Badge
+      className={classNames('Badge', VerificationStatusBadgeClassName.Verified)}
+      variant="Success"
+      fill="Solid"
+      size="500"
+    >
       <Text size="L400">Verified</Text>
     </Badge>
   );

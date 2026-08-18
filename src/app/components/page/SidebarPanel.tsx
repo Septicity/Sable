@@ -38,7 +38,7 @@ export function SidebarPanel({ title }: { title: string }) {
               sizedIcon(SquaresFour, '200', { filled: true })
             ) : (
               <Box grow="Yes">
-                <Text size="H4" truncate align="Center">
+                <Text className="Label" size="H4" truncate align="Center">
                   {title}
                 </Text>
               </Box>

@@ -20,6 +20,10 @@ type ResolveUnreadBadgeModeOptions = Omit<UnreadBadgeProps, 'mode'> & {
 
 export type UnreadBadgeMode = 'dot' | 'count';
 
+const UnreadBadgeClassName = {
+  Highlight: 'Highlight',
+} as const;
+
 /**
  * Resolve whether an unread badge should render as a dot or a numeric count.
  *
@@ -87,7 +91,7 @@ export function UnreadBadge({ highlight, count, dm, mode }: UnreadBadgeProps) {
 
   return (
     <Badge
-      className={classNames("Badge", { 'Highlight': highlight })}
+      className={classNames('Badge', highlight && UnreadBadgeClassName.Highlight)}
       variant={highlight ? 'Success' : 'Secondary'}
       size={resolvedMode === 'count' ? '400' : '200'}
       fill="Solid"

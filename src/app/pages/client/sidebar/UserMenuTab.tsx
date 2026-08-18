@@ -722,6 +722,7 @@ export function UserMenuTab({ isBottom, isMobile }: { isBottom?: boolean; isMobi
         <SidebarItemBadge mode="count">
           <Badge
             variant={unverified ? 'Critical' : 'Warning'}
+            className="Badge"
             size="300"
             fill="Solid"
             radii="Pill"

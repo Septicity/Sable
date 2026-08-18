@@ -331,7 +331,7 @@ function SpaceHeader({ hideText, mx }: { hideText?: boolean; mx: MatrixClient })
                   gap="100"
                   style={hasBanner ? { color: '#fff' } : {}}
                 >
-                  <Text size="H4" truncate>
+                  <Text className="Label" size="H4" truncate>
                     {spaceName}
                   </Text>
                   {joinRules?.join_rule !== JoinRule.Public && chipIcon(Lock)}
@@ -342,6 +342,7 @@ function SpaceHeader({ hideText, mx }: { hideText?: boolean; mx: MatrixClient })
                     variant="Background"
                     style={hasBanner ? { backgroundColor: 'transparent', color: '#fff' } : {}}
                     onClick={menu.triggerProps.onClick}
+                    className="Button"
                   >
                     {composerIcon(DotsThreeOutlineVerticalIcon, {
                       weight: menu.anchor ? 'fill' : 'regular',

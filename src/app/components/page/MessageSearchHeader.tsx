@@ -19,7 +19,7 @@ export function MessageSearchHeader() {
         </Box>
         <Box justifyContent="Center" alignItems="Center" gap="200">
           {screenSize !== ScreenSize.Mobile && dropzoneIcon(MagnifyingGlass)}
-          <Text size="H3" truncate>
+          <Text className="Label" size="H3" truncate>
             Message Search
           </Text>
         </Box>

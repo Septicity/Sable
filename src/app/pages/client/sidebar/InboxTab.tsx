@@ -66,6 +66,7 @@ export function InboxTab({ isBottom, isMobile }: { isBottom?: boolean; isMobile?
           <Box direction="Column" alignItems="Center">
             <SidebarAvatar
               as="button"
+              className="Button"
               ref={triggerRef}
               outlined={!isMobile}
               {...mobileTapActivation}

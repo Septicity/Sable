@@ -171,7 +171,7 @@ export function LobbyHeader({ showProfile, powerLevels }: LobbyHeaderProps) {
             </Box>
             <Box grow="Yes" justifyContent="Center">
               {showProfile && (
-                <Text size="H3" truncate>
+                <Text className="Label" size="H3" truncate>
                   {name}
                 </Text>
               )}
@@ -183,15 +183,19 @@ export function LobbyHeader({ showProfile, powerLevels }: LobbyHeaderProps) {
             <Box justifyContent="Center" alignItems="Center" gap="300">
               {showProfile && (
                 <>
-                  <Avatar size="300">
+                  <Avatar className="Avatar" size="300">
                     <RoomAvatar
                       roomId={space.roomId}
                       src={avatarUrl}
                       alt={name}
-                      renderFallback={() => <Text size="H4">{nameInitials(name)}</Text>}
+                      renderFallback={() => (
+                        <Text className="Label" size="H4">
+                          {nameInitials(name)}
+                        </Text>
+                      )}
                     />
                   </Avatar>
-                  <Text size="H3" truncate>
+                  <Text className="Label" size="H3" truncate>
                     {name}
                   </Text>
                 </>
@@ -215,6 +219,7 @@ export function LobbyHeader({ showProfile, powerLevels }: LobbyHeaderProps) {
                   fill="None"
                   ref={triggerRef}
                   onClick={() => setPeopleDrawer((drawer) => !drawer)}
+                  className="Button"
                 >
                   {composerIcon(UserCircle, { weight: peopleDrawer ? 'fill' : 'regular' })}
                 </IconButton>
@@ -244,6 +249,7 @@ export function LobbyHeader({ showProfile, powerLevels }: LobbyHeaderProps) {
                   onClick={menu.triggerProps.onClick}
                   ref={triggerRef}
                   aria-pressed={!!menu.anchor}
+                  className="Button"
                 >
                   {composerIcon(DotsThreeOutlineVerticalIcon, {
                     weight: menu.anchor ? 'fill' : 'regular',

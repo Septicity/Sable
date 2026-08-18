@@ -3,6 +3,7 @@ import type { ReactEventHandler } from 'react';
 import { useState } from 'react';
 import bgColorImg from '$utils/bgColorImg';
 import { settingsAtom } from '$state/settings';
+import classNames from 'classnames';
 import { useSetting } from '$state/hooks/settings';
 import { useRenderableMediaUrl } from '$hooks/useRenderableMediaUrl';
 import * as css from './RoomAvatar.css';
@@ -32,7 +33,7 @@ export function AvatarImage({ src, alt, uniformIcons, onError }: AvatarImageProp
 
   return (
     <FoldsAvatarImage
-      className={css.RoomAvatar}
+      className={classNames(css.RoomAvatar)}
       style={{ backgroundColor: useUniformIcons ? normalizedBg : undefined }}
       src={mediaSrc}
       crossOrigin={isBlobUrl ? undefined : 'anonymous'}

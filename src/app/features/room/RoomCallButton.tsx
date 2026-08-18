@@ -69,6 +69,7 @@ export function RoomCallButton({
           onClick={startSelectedCall}
           disabled={startDisabled}
           aria-label={ariaLabel}
+          className="Button"
         >
           {composerIcon(icon)}
         </IconButton>

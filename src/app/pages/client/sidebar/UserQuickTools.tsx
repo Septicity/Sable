@@ -5,6 +5,7 @@ import { SettingsTab } from './SettingsTab';
 import * as css from './UserQuickTools.css';
 import { UserMenuTab } from './UserMenuTab';
 import { MessageTab } from './MessageTab';
+import classNames from 'classnames';
 
 export function UserQuickTools({
   width,
@@ -26,7 +27,7 @@ export function UserQuickTools({
             direction="Row"
             justifyContent={compact ? 'SpaceAround' : 'SpaceBetween'}
             alignItems="Center"
-            className={css.UserQuickTools}
+            className={classNames('UserQuickTools', css.UserQuickTools, { Compact: compact })}
             style={
               compact
                 ? {

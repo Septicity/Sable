@@ -4,11 +4,18 @@ import type { ReactNode } from 'react';
 import { useId } from 'react';
 import { Presence, usePresenceLabel } from '$hooks/useUserPresence';
 import * as css from './styles.css';
+import classNames from 'classnames';
 
 export const PresenceToColor: Record<Presence, MainColor> = {
   [Presence.Online]: 'Success',
   [Presence.Unavailable]: 'Warning',
   [Presence.Offline]: 'Secondary',
+};
+
+const PresenceClassName: Record<Presence, string> = {
+  [Presence.Online]: 'Online',
+  [Presence.Unavailable]: 'Busy',
+  [Presence.Offline]: 'Offline',
 };
 
 type PresenceBadgeProps = {
@@ -35,6 +42,7 @@ export function PresenceBadge({ presence, size }: PresenceBadgeProps) {
     >
       {(triggerRef) => (
         <Badge
+          className={classNames('Badge', PresenceClassName[presence])}
           aria-labelledby={badgeLabelId}
           ref={triggerRef}
           size={size}
@@ -56,7 +64,7 @@ export const AvatarPresence = as<'div', AvatarPresenceProps>(
     <Box as={AsAvatarPresence} className={css.AvatarPresence} {...props} ref={ref}>
       {badge && (
         <div
-          className={css.AvatarPresenceBadge}
+          className={classNames('AvatarPresenceBadge', css.AvatarPresenceBadge)}
           style={{ backgroundColor: color[variant].Container }}
         >
           {badge}

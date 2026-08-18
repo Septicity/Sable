@@ -20,6 +20,7 @@ export function NavigateTab({ isBottom, isMobile }: { isBottom?: boolean; isMobi
           <Box direction="Column" alignItems="Center">
             <SidebarAvatar
               as="button"
+              className="Button"
               ref={triggerRef}
               outlined={!isMobile}
               {...mobileTapActivation}

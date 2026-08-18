@@ -343,13 +343,14 @@ export function RoomViewHeader({ callView }: Readonly<{ callView?: boolean }>) {
         )}
         <Box grow="Yes" alignItems="Center" gap="300">
           {screenSize !== ScreenSize.Mobile && (
-            <Avatar size="300">
+            <Avatar size="300" className="Avatar">
               <RoomAvatar
                 roomId={room.roomId}
                 src={avatarUrl}
                 alt={name}
                 renderFallback={() => (
                   <RoomIcon
+                    className="Fallback"
                     size="200"
                     joinRule={room.getJoinRule()}
                     roomType={room.getType()}
@@ -360,7 +361,7 @@ export function RoomViewHeader({ callView }: Readonly<{ callView?: boolean }>) {
             </Avatar>
           )}
           <Box direction="Column">
-            <Text size={topic ? 'H5' : 'H3'} truncate>
+            <Text className="Label" size={topic ? 'H5' : 'H3'} truncate>
               {name}
             </Text>
             {topic && (
@@ -406,7 +407,12 @@ export function RoomViewHeader({ callView }: Readonly<{ callView?: boolean }>) {
                   }
                 >
                   {(triggerRef) => (
-                    <IconButton fill="None" ref={triggerRef} onClick={handleSearchClick}>
+                    <IconButton
+                      fill="None"
+                      ref={triggerRef}
+                      onClick={handleSearchClick}
+                      className="Button"
+                    >
                       {composerIcon(MagnifyingGlass)}
                     </IconButton>
                   )}
@@ -437,6 +443,7 @@ export function RoomViewHeader({ callView }: Readonly<{ callView?: boolean }>) {
                       onClick={handleOpenPinMenu}
                       ref={triggerRef}
                       aria-pressed={!!pinMenu.anchor}
+                      className="Button"
                     >
                       {unreadPinsCount > 0 && (
                         <Badge
@@ -449,6 +456,7 @@ export function RoomViewHeader({ callView }: Readonly<{ callView?: boolean }>) {
                           size="400"
                           fill="Solid"
                           radii="Pill"
+                          className="Badge"
                         >
                           <Text as="span" size="L400">
                             {unreadPinsCount}
@@ -504,6 +512,7 @@ export function RoomViewHeader({ callView }: Readonly<{ callView?: boolean }>) {
                     }}
                     aria-pressed={threadBrowserOpen || !!openThreadId}
                     style={{ position: 'relative' }}
+                    className="Button"
                   >
                     {unreadThreadsCount > 0 && (
                       <Badge
@@ -545,6 +554,7 @@ export function RoomViewHeader({ callView }: Readonly<{ callView?: boolean }>) {
                   ref={triggerRef}
                   onClick={() => setWidgetDrawer((d) => !d)}
                   style={{ position: 'relative' }}
+                  className="Button"
                 >
                   {widgets.length > 0 && (
                     <Badge
@@ -583,7 +593,12 @@ export function RoomViewHeader({ callView }: Readonly<{ callView?: boolean }>) {
               }
             >
               {(triggerRef) => (
-                <IconButton fill="None" ref={triggerRef} onClick={handleMemberToggle}>
+                <IconButton
+                  fill="None"
+                  ref={triggerRef}
+                  onClick={handleMemberToggle}
+                  className="Button"
+                >
                   {composerIcon(UserCircle, { weight: peopleDrawer ? 'fill' : 'regular' })}
                 </IconButton>
               )}
@@ -607,6 +622,7 @@ export function RoomViewHeader({ callView }: Readonly<{ callView?: boolean }>) {
                   onClick={() => {
                     setChat(!chat);
                   }}
+                  className="Button"
                 >
                   {composerIcon(ChatCircleDots, { weight: chat ? 'fill' : 'regular' })}
                 </IconButton>
@@ -637,6 +653,7 @@ export function RoomViewHeader({ callView }: Readonly<{ callView?: boolean }>) {
                   onClick={optionsMenu.triggerProps.onClick}
                   ref={triggerRef}
                   aria-pressed={!!optionsMenu.anchor}
+                  className="Button"
                 >
                   {composerIcon(DotsThreeOutlineVerticalIcon, {
                     weight: optionsMenu.anchor ? 'fill' : 'regular',

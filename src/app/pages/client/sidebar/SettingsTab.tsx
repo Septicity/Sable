@@ -13,7 +13,14 @@ export function SettingsTab({ isBottom, isMobile }: { isBottom?: boolean; isMobi
     <SidebarItem active={opened} isBottom={isBottom}>
       <SidebarItemTooltip tooltip="Settings" position={isBottom ? 'Top' : 'Right'}>
         {(triggerRef) => (
-          <SidebarAvatar as="button" ref={triggerRef} outlined onClick={openSettings} size={'400'}>
+          <SidebarAvatar
+            className="Button"
+            as="button"
+            ref={triggerRef}
+            outlined
+            onClick={openSettings}
+            size={'400'}
+          >
             <GearSix
               size={getPhosphorIconSize(isBottom ? 'inline' : 'toolbar')}
               weight={opened ? 'fill' : 'regular'}

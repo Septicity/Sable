@@ -98,6 +98,7 @@ function HomeHeader({ hideText }: { hideText?: boolean }) {
     <PageNavHeaderWithMenu
       hideText={hideText}
       title="Home"
+      className="Label"
       collapsedIcon={composerIcon(House, { weight: menu.anchor ? 'fill' : 'regular' })}
       menu={<HomeMenu requestClose={menu.close} />}
       anchor={menu.anchor}

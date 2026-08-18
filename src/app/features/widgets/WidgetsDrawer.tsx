@@ -55,7 +55,11 @@ function WidgetDrawerHeader({ activeWidget, onBack }: WidgetsDrawerHeaderProps) 
   const setWidgetDrawer = useSetSetting(settingsAtom, 'isWidgetDrawer');
 
   return (
-    <Header className={classNames("Header", css.WidgetsDrawerHeader)} variant="Background" size="600">
+    <Header
+      className={classNames('Header', css.WidgetsDrawerHeader)}
+      variant="Background"
+      size="600"
+    >
       <Box grow="Yes" alignItems="Center" gap="200">
         {activeWidget && (
           <Box shrink="No" alignItems="Center">
@@ -85,6 +89,7 @@ function WidgetDrawerHeader({ activeWidget, onBack }: WidgetsDrawerHeaderProps) 
                 ref={triggerRef}
                 variant="Background"
                 onClick={() => setWidgetDrawer(false)}
+                className="Button"
               >
                 {composerIcon(X)}
               </IconButton>
@@ -264,7 +269,7 @@ export function WidgetsDrawer({ room }: WidgetsDrawerProps) {
 
   return (
     <Box
-      className={classNames("WidgetsDrawer", "Drawer",css.WidgetsDrawer)}
+      className={classNames('WidgetsDrawer', 'Drawer', css.WidgetsDrawer)}
       shrink="No"
       direction="Column"
       style={{

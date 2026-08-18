@@ -31,14 +31,19 @@ export function PageNavHeaderWithMenu({
       <PageNavHeader size="600">
         {hideText ? (
           <Box alignItems="Center" grow="Yes" justifyContent="Center">
-            <IconButton aria-pressed={!!anchor} variant="Background" onClick={triggerProps.onClick}>
+            <IconButton
+              className="Button"
+              aria-pressed={!!anchor}
+              variant="Background"
+              onClick={triggerProps.onClick}
+            >
               {collapsedIcon}
             </IconButton>
           </Box>
         ) : (
           <Box grow="Yes" gap="300">
             <Box grow="Yes" alignItems="Center">
-              <Text size="H4" truncate>
+              <Text className="Label" size="H4" truncate>
                 {title}
               </Text>
             </Box>
@@ -47,6 +52,7 @@ export function PageNavHeaderWithMenu({
                 aria-pressed={!!anchor}
                 variant="Background"
                 onClick={triggerProps.onClick}
+                className="Button"
               >
                 {composerIcon(DotsThreeOutlineVerticalIcon, {
                   weight: anchor ? 'fill' : 'regular',

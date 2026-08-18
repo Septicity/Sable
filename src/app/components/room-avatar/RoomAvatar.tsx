@@ -34,7 +34,7 @@ export function RoomAvatar({ roomId, src, alt, renderFallback, uniformIcons }: R
     return (
       <AvatarFallback
         style={{ backgroundColor: colorMXID(roomId ?? ''), color: color.Surface.Container }}
-        className={css.RoomAvatar}
+        className={classNames('Fallback', css.RoomAvatar)}
       >
         {renderFallback()}
       </AvatarFallback>
